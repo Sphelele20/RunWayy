@@ -1,0 +1,44 @@
+@model List<RunWay.Models.ViewModels.UserRolesViewModel>
+
+@{
+    ViewData["Title"] = "User Roles Management";
+}
+
+<h2 class="mt-4">User Roles Management</h2>
+<hr />
+
+<table class="table table-striped table-bordered">
+    <thead class="table-info">
+        <tr>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Roles</th>
+            <th style="width: 150px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@user.UserName</td>
+                <td>
+                    @if (user.Roles != null && user.Roles.Any())
+                    {
+                        @string.Join(", ", user.Roles)
+                    }
+                    else
+                    {
+                        <span class="text-muted">No Roles</span>
+                    }
+                </td>
+                <td>
+                    <a asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.UserId"
+                       class="btn btn-sm btn-danger">
+                        Manage Roles
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

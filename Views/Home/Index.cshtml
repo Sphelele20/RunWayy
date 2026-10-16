@@ -1,0 +1,13 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center py-5">
+    <h1 class="display-4">Welcome to RunWay</h1>
+    <p class="lead">Organise and join running events.</p>
+    @if (User.Identity?.IsAuthenticated != true)
+    {
+        <a class="btn btn-primary me-2" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        <a class="btn btn-outline-secondary" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    }
+</div>
