@@ -4,6 +4,14 @@ IF DB_ID(N'RaceDayPlanningDb') IS NULL CREATE DATABASE [RaceDayPlanningDb];
 GO
 USE [RaceDayPlanningDb];
 GO
+SET QUOTED_IDENTIFIER ON;
+SET ANSI_NULLS ON;
+SET ANSI_PADDING ON;
+SET ANSI_WARNINGS ON;
+SET ARITHABORT ON;
+SET CONCAT_NULL_YIELDS_NULL ON;
+SET NUMERIC_ROUNDABORT OFF;
+GO
 IF EXISTS (SELECT 1 FROM sys.tables WHERE name = 'AspNetUsers') THROW 50001, 'Use a fresh empty RaceDayPlanningDb database; existing data has not been changed.', 1;
 GO
 CREATE TABLE [AspNetRoles] (
