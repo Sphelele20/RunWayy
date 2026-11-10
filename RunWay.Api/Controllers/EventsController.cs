@@ -121,14 +121,13 @@ public class EventsController : ControllerBase
         if (ev == null) return NotFound();
         if (!User.CanManage(ev)) return Forbid();
 
-        await using var transaction = await _db.Database.BeginTransactionAsync(ct);
-        var enrolments = await _db.Enrolments.Where(x => x.EventId == id).ToListAsync(ct);
+
+        var enrolments = await _db.Enrolments.Include(x => x.Result).Where(x => x.EventId == id).ToListAsync(ct);
         _db.Enrolments.RemoveRange(enrolments);
-        await _db.SaveChangesAsync(ct);
         var banner = ev.BannerBlobName;
         _db.Events.Remove(ev); // categories, enrolments and results are removed by cascade
         await _db.SaveChangesAsync(ct);
-        await transaction.CommitAsync(ct);
+
         await _files.DeleteAsync(banner, ct);
         return NoContent();
     }
@@ -154,3 +153,4 @@ public class EventsController : ControllerBase
         return Ok(updated.ToDto(includeCategories: true));
     }
 }
+
