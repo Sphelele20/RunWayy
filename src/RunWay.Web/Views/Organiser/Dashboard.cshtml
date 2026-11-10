@@ -1,0 +1,7 @@
+@model List<EventDto>
+@{ViewData["Title"]="Organiser dashboard";}
+<p class="eyebrow">ORGANISER HQ</p><section class="section-heading"><h1>Your events.<br/><em>Their next challenge.</em></h1><a class="btn btn-primary" asp-action="Create">Create an event +</a></section>
+<div class="stats"><div><strong>@Model.Count</strong><span>Events created</span></div><div><strong>@Model.Sum(e=>e.EnrolmentCount)</strong><span>Total enrolments</span></div><div><strong>@Model.Count(e=>e.Date>DateTime.UtcNow)</strong><span>Upcoming events</span></div></div>
+<h2>Your event calendar</h2>
+@if(Model.Count==0){<p class="empty">Your first event starts here. Create an event, add categories, and open your start line.</p>}
+<div class="table-responsive"><table class="table"><thead><tr><th>Event</th><th>Date (UTC)</th><th>Entries</th><th>Manage</th></tr></thead><tbody>@foreach(var e in Model){<tr><td><strong>@e.Name</strong><br/>@e.EventType · @e.Location</td><td>@e.Date.ToString("dd MMM yyyy, HH:mm")</td><td>@e.EnrolmentCount</td><td><a asp-action="Manage" asp-route-id="@e.Id">Manage →</a></td></tr>}</tbody></table></div>

@@ -1,0 +1,366 @@
+[
+  {
+    "original": "..gitignore",
+    "sha": "eaa9902955bc9aee5399d1d610143385d23e1bdf"
+  },
+  {
+    "original": ".gitattributes",
+    "sha": "1ff0c423042b46cb1d617b81efb715defbe8054d"
+  },
+  {
+    "original": "Add\"Program.cs\"",
+    "sha": "20b1d46eb59ae08c90ced30363332a7f09d8810f"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/AccessDenied.cshtml",
+    "sha": "3510edef22cba24faab012b41624d1796e51565a"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/AccessDenied.cshtml.cs",
+    "sha": "55215e3d3c2b367ee10e238a5b4331973e1ce00d"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Add\"Login.cshtml\"",
+    "sha": "2b193370c7045bde135b37ac447b42bb05a36a8f"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Add\"Login.cshtml.cs\"",
+    "sha": "5f71d6fcb977d3b88eff4b0511178f419257ca5e"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Add\"Register.cshtml\"",
+    "sha": "fc9b47753e744d572c0bfc13371e17bfd526b514"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Add\"Register.cshtml.cs\"",
+    "sha": "887d7ee706bc589bcb7399808b81e41933f9e380"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/ConfirmEmail.cshtml",
+    "sha": "4fedf3133a85369463193c71c7d986827514ce8b"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/ConfirmEmail.cshtml.cs",
+    "sha": "ea0c8255e420a5d5beddfdef2f26d9724354f201"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/ConfirmEmailChange.cshtml",
+    "sha": "5112bc650b252acd988a0ca2133e38dafcca7346"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/ConfirmEmailChange.cshtml.cs",
+    "sha": "bd1b0827090d7b5ee541d1b007a9764f40366c63"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/ExternalLogin.cshtml",
+    "sha": "71c9fa2b66435bcef7d034f43b45a4f5dd6b4031"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs",
+    "sha": "529674574f552cc7925c5e2c5480954c97a2b6c0"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/ForgotPassword.cshtml",
+    "sha": "54b477e19d8e9ae791a2f5d3459d2ba9d99a4ea3"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/ForgotPassword.cshtml.cs",
+    "sha": "f41e4b47194f9556b8f90cb477ae86606ed96a30"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/ForgotPasswordConfirmation.cshtml",
+    "sha": "623e6f076804c7106bad5608d5ce39d711b2471c"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/ForgotPasswordConfirmation.cshtml.cs",
+    "sha": "a9ecd34efde6aec06b7fdbc5bb3ad2bf8f412e0b"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Lockout.cshtml",
+    "sha": "1809f5fa8d6ca048086c78f0d2feff10da182a02"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Lockout.cshtml.cs",
+    "sha": "23a8f2a98f123853769431b006a5b30aa535afff"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/LoginWith2fa.cshtml",
+    "sha": "047462d71b138ac1ebb5ae9a158a6ae732b606bf"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/LoginWith2fa.cshtml.cs",
+    "sha": "bee73ff8a0616107c7fabfa05dce0588d47a101e"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/LoginWithRecoveryCode.cshtml",
+    "sha": "80b134aa686c56c9ed20f93fa10e2d96362d4527"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/LoginWithRecoveryCode.cshtml.cs",
+    "sha": "4a286b8d20544bc59f772104f3ec44ddb8efd718"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Logout.cshtml",
+    "sha": "5df3f071c9379baa4362877aa6a10c8bbc5ff282"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Logout.cshtml.cs",
+    "sha": "abdbc68e02ac78910913ac25e72426513ebe424f"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/ChangePassword.cshtml",
+    "sha": "f1c4fd70268d4381b47cc087f54703c8d6c075dd"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/ChangePassword.cshtml.cs",
+    "sha": "253ae23ae740482fea1fc3f7f97834a68ce3db40"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/DeletePersonalData.cshtml",
+    "sha": "23aee3c97102a57404817ee5180d2aea4aaf16cc"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/DeletePersonalData.cshtml.cs",
+    "sha": "cdd1889e6b845ba1530d0d0cf22af7bb4ffe2b2e"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/Disable2fa.cshtml",
+    "sha": "ca3b7a76549723b8528501b9fef4bb69d6cab44f"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/Disable2fa.cshtml.cs",
+    "sha": "e9ed6cdb6a1e986f9248338a818eb43656d8dc91"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/Email.cshtml",
+    "sha": "1daa8a296290740a5bdd84c3169b08ffde3067fe"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/Email.cshtml.cs",
+    "sha": "bfba43abd8db49a908033a2f380b288629cd77f9"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml",
+    "sha": "e63bfb5588ad761916c4ba06902d029b827bea91"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml.cs",
+    "sha": "1849e735ad1dab76ac5514b72b70adadfcd4f7e4"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/ExternalLogins.cshtml",
+    "sha": "66346c3967eab2f30656097587d9af7d727f065d"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/ExternalLogins.cshtml.cs",
+    "sha": "c1068658d3da942502f5d6997a8f8c369b72adcb"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/GenerateRecoveryCodes.cshtml",
+    "sha": "60b6466e7b845460d12a21da2a43f7e9b884e216"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/GenerateRecoveryCodes.cshtml.cs",
+    "sha": "ca6d723874ba4602de078f475764f3046a00ec5f"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/Index.cshtml",
+    "sha": "18953e3fc264417697f5443627d60ca31fa8a36d"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/Index.cshtml.cs",
+    "sha": "b5209d9659f07b0589d42e1e81363d01ee791fa7"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/ManageNavPages.cs",
+    "sha": "af9f87c79af111c4a8c6b94c4a0de6925222ba37"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/_Layout.cshtml",
+    "sha": "2a9b04d6179058f8b838d4219c1789475be244ec"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml",
+    "sha": "b5a56a70093d7a61f131943aa843f11063fa533e"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/_StatusMessage.cshtml",
+    "sha": "8ee9e0277a5aeb1b452ba6f894627873fb9f6454"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml",
+    "sha": "4d5639d037cf68514043f10edd1aa99a9dc8e446"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/Manage/_ViewStart.cshtml",
+    "sha": "1a6ab65c79db18cc038c53192761fcdfbbc9bb89"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/RegisterConfirmation.cshtml",
+    "sha": "4b884db8381643429b986e33358c192e4b0df305"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/RegisterConfirmation.cshtml.cs",
+    "sha": "2edc85359b0976124ae5faceb8bad4c04b565546"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/ResendEmailConfirmation.cshtml",
+    "sha": "b64472b7d7b05383b9ded5403df00ac4679fdc0b"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/ResendEmailConfirmation.cshtml.cs",
+    "sha": "66a7613c0920b2c2bedfe70d5f293c3beefaefea"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/ResetPassword.cshtml",
+    "sha": "1133dd995c001182b065b50065e42f0fcaabe39e"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/ResetPassword.cshtml.cs",
+    "sha": "f7ba21453c37619735e2a0c569b4f6784cf66e43"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/ResetPasswordConfirmation.cshtml",
+    "sha": "70d93f69ece10c6b7a2e7fac164db82dccca0611"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/ResetPasswordConfirmation.cshtml.cs",
+    "sha": "4930bffa45ad5c12aca8ad4974a7ecd08eca5639"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/_StatusMessage.cshtml",
+    "sha": "8ee9e0277a5aeb1b452ba6f894627873fb9f6454"
+  },
+  {
+    "original": "Areas/Identity/Pages/Account/_ViewImports.cshtml",
+    "sha": "da32a583910094f2a86cff660fa28b7ac40b3cb7"
+  },
+  {
+    "original": "Areas/Identity/Pages/Error.cshtml",
+    "sha": "71b4d44aa6c45704a4266fde7eb9cca881b2f170"
+  },
+  {
+    "original": "Areas/Identity/Pages/Error.cshtml.cs",
+    "sha": "b02d2636112bb3e17d563f9a6372755feb7a852b"
+  },
+  {
+    "original": "Areas/Identity/Pages/_Layout.cshtml",
+    "sha": "cde6d35eda71cd8d4987fcf34e3a84d3e5b5b8f8"
+  },
+  {
+    "original": "Areas/Identity/Pages/_ViewImports.cshtml",
+    "sha": "d4c88e2105be673f85221222d068bdac024b53d3"
+  },
+  {
+    "original": "Areas/Identity/Pages/_ViewStart.cshtml",
+    "sha": "a0f2b94808d747cb38d068ed7ddb867a5161ab4c"
+  },
+  {
+    "original": "Controllers/Add\"HomeController.cs\"",
+    "sha": "ccc0a97ebfc1ee3692444280c8b5ed16651d02d1"
+  },
+  {
+    "original": "Controllers/Add\"UserRolesController.cs\"",
+    "sha": "93200daa516cdb3602d0b367d17cffbd9173fe29"
+  },
+  {
+    "original": "Data/Add\"ApplicationDbContext.cs\"",
+    "sha": "1fe8155188818443f998c7e768550f072db38729"
+  },
+  {
+    "original": "Data/Add\"ApplicationUser.cs\"",
+    "sha": "2f635460eb3cec87360e57e13d6fedb58e727539"
+  },
+  {
+    "original": "Models/ErrorViewModel.cs",
+    "sha": "2cde5702af9c4a141e39a93dba45d9a3a7c8f2e7"
+  },
+  {
+    "original": "Models/Interface/Add\"IProfileImageService.cs\"",
+    "sha": "e0c87b3197703744b56a6bb497bf1a412e75b7d2"
+  },
+  {
+    "original": "Models/ViewModels/Add\"ManageUserRolesViewModel.cs\"",
+    "sha": "bd98870dbb7480d6c79c9a4e80d5ab7f6f5b0f96"
+  },
+  {
+    "original": "Models/ViewModels/add\"UserRolesViewModel.cs\"",
+    "sha": "28bd93bce5c8c45e1e62b2b5a58db39aec2e989e"
+  },
+  {
+    "original": "Properties/launchSettings.json",
+    "sha": "0ea715adab81adf7030e02775f3da0f3c0cef44d"
+  },
+  {
+    "original": "README.md.",
+    "sha": "62f130d92d22db8ad0821a65ffd12c2cde0e8882"
+  },
+  {
+    "original": "RunWay.csproj",
+    "sha": "d1762ae25a42ef2d3aa3d1064d34ff3db2c0b6f2"
+  },
+  {
+    "original": "RunWayy.sln.",
+    "sha": "4d410ddd1a4bedf0b8538e436ae89f219f033648"
+  },
+  {
+    "original": "Views/Home/Add\"Index.cshtml\"",
+    "sha": "bcde3144bd7025c03a9c2aefa7933960b9b7f790"
+  },
+  {
+    "original": "Views/Home/AdminDashboard.cshtml",
+    "sha": "9a53fefcfa63bbbc7e8deec3706fd1253cf81fbb"
+  },
+  {
+    "original": "Views/Home/Privacy.cshtml",
+    "sha": "f04a28f7aa046dde615740ce45f5bd5929911906"
+  },
+  {
+    "original": "Views/Shared/Error.cshtml",
+    "sha": "4e17e0566227ded5153a4f689fc3e25be552c772"
+  },
+  {
+    "original": "Views/Shared/_Layout.cshtml",
+    "sha": "88a4efb37dbc96972cd80e73a24d2cd5b2ebd1f9"
+  },
+  {
+    "original": "Views/Shared/_LoginPartial.cshtml",
+    "sha": "32350fe6b2b5426f9889b1ea93cf6fa66bebf0af"
+  },
+  {
+    "original": "Views/Shared/_ValidationScriptsPartial.cshtml",
+    "sha": "78c7bc8fc1e5cef913a981860c94e9fdc163a73e"
+  },
+  {
+    "original": "Views/UserRoles/Add\"Index.cshtml\"",
+    "sha": "6a19ea5821c6a28fa59d2ad1620c7d1d163d51ef"
+  },
+  {
+    "original": "Views/UserRoles/Add\"Manage.cshtml'",
+    "sha": "111ad05d123ec2df1c2aeb8cd70c2f26182bc326"
+  },
+  {
+    "original": "Views/UserRoles/Add\"NotFound.cshtml\"",
+    "sha": "12ecc39d8fc69a4bedcb49d44e0285c802f5f438"
+  },
+  {
+    "original": "Views/_ViewImports.cshtml",
+    "sha": "524216f89b8bbc657107aa79d9774880cd522bb0"
+  },
+  {
+    "original": "Views/_ViewStart.cshtml",
+    "sha": "820a2f6e02f108554a7392e866561bf791a3d360"
+  },
+  {
+    "original": "appsettings.Development.json",
+    "sha": "0c208ae9181e5e5717e47ec1bd59368aebc6066e"
+  },
+  {
+    "original": "appsettings.json",
+    "sha": "ffb89936d31d2db2bab51d52f4dde6be0bb2ee09"
+  },
+  {
+    "original": "wwwroot/css/site.css",
+    "sha": "207c4bf15a6fab2cf3cac78cb41eeec6f7387f3d"
+  }
+]

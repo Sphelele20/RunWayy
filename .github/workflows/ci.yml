@@ -1,0 +1,31 @@
+name: Part 3 build and integration
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+      - run: dotnet restore RunWayy.sln
+      - run: dotnet build RunWayy.sln -c Release --no-restore
+      - name: Exercise API and MVC together
+        run: dotnet run --project tests/RunWay.Smoke -c Release --no-build -- "$PWD" Release
+  containers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose build
+      - run: docker compose up -d
+      - name: Wait for API and MVC
+        run: |
+          curl --fail --retry 30 --retry-all-errors --retry-delay 2 http://localhost:5100/health
+          curl --fail --retry 30 --retry-all-errors --retry-delay 2 http://localhost:5200/health
+          curl --fail http://localhost:5200/Account/Login
+      - if: always()
+        run: docker compose logs && docker compose down
