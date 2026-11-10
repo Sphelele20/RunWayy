@@ -1,0 +1,13 @@
+**/bin/
+**/obj/
+.vs/
+.vscode/
+**/*.db
+**/*.db-shm
+**/*.db-wal
+**/App_Data/
+.env
+.env.*
+!.env.example
+**/secrets.json
+**/TestResults/
