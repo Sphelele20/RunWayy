@@ -119,3 +119,8 @@ The 17 xUnit controller cases complement the 96 HTTP/MVC integration checks. CI 
 Repository: https://github.com/Sphelele20/RunWayy/tree/part3/raceday-mvc-api
 
 Required walkthrough videos: Part 1 planning/SSMS, Part 2 running API/unit tests, Part 3 MVC/Azure/Docker. Record your current implementation and add your actual unlisted URLs here before ARC submission. Historical per-part commit requirements and pre-coding planning cannot be inferred from a passing build; see the audit.
+## Verified build evidence
+
+[Successful GitHub Actions run: build, unit tests, planning validation, Docker, clean SQL Server script and Azurite integration checks](https://github.com/Sphelele20/RunWayy/actions/runs/42832535882).
+
+The paper also asks for a literal screenshot of the green build in this README. Save and embed a screenshot of that run before submission; a status link alone does not fulfil that evidence requirement.

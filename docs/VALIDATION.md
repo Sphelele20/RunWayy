@@ -4,7 +4,7 @@
 - API and MVC build passed.
 - 96 integration checks passed locally against an isolated SQLite database.
 - Checks include submitting the original MVC event/category/enrolment/profile-photo forms, all role pages, image byte round trips, ownership, duplicate records, results and sign-out.
-- GitHub CI passed all 96 checks against Docker, SQL Server and Azurite, including actual blob uploads/downloads and MVC forms. [Successful run](https://github.com/Sphelele20/RunWayy/actions/runs/42826770998).
+- GitHub CI passed all 96 checks against Docker, SQL Server and Azurite, including actual blob uploads/downloads and MVC forms. [Successful run](https://github.com/Sphelele20/RunWayy/actions/runs/42832535882).
 - Live Azure student storage remains unverified until your account is configured.
 - Local NuGet vulnerability lookup was unavailable (NU1900). No security-audit success is claimed.
 
@@ -22,3 +22,13 @@
 - Removed production sample JWT secrets and automatic demo accounts.
 - Corrected the original Azurite account key and non-root container key-directory permissions.
 - Bundled Bootstrap and core scripts locally without changing the design. Google Fonts and the unobtrusive validation script retain their existing CDN sources; server validation remains active.
+
+## Full-paper verification, 10 November 2026
+
+- 17 xUnit tests passed, covering success/failure registration, login, event management, ownership and enrolment rules.
+- 96 HTTP/MVC integration checks passed locally and in CI; these also verify authentication and role enforcement.
+- Planning-package validation passed: the current 11-table ERD, EF metadata, endpoint plan and SQL script are included.
+- The standalone SQL script executed successfully on a clean SQL Server database in CI.
+- Both build and Docker jobs passed on commit 2c92a30c31e2f099d67edabedefff6d8917333f9.
+- [Verified successful GitHub Actions run](https://github.com/Sphelele20/RunWayy/actions/runs/42832535882).
+- This verifies the implementation, not historical commit counts, a pre-coding planning date, real Azure access, walkthrough videos or ARC submission. The required literal CI screenshot remains to be saved/embedded.

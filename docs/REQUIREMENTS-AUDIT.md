@@ -14,7 +14,7 @@ The screenshots supplied on 10 November 2026 cover the Part 1 planning requireme
 | Planning files in /docs and structure validation workflow | scripts/validate-planning.ps1 runs in CI |
 | 20 meaningful commits for Part 1 | Original RaceDay default branch had five commits when checked; the per-part history requirement is not satisfied by inventing/backdating commits |
 | Planning completed before API coding | Current plan is an honest reconciliation; historical pre-coding planning cannot be retroactively proved |
-| README green-build screenshot and YouTube link | CI screenshot to be recorded after the verification run; a valid Part 1 walkthrough remains the student's responsibility |
+| README green-build screenshot and YouTube link | Successful CI is linked in README; a literal screenshot still needs to be saved and embedded. A valid Part 1 walkthrough remains the student's responsibility |
 
 ## Part 2
 
@@ -29,7 +29,7 @@ The screenshots supplied on 10 November 2026 cover the Part 1 planning requireme
 | Unit tests for success/failure auth, events and enrolment | 17 xUnit cases, plus 96 real-process integration checks that verify HTTP authentication/role enforcement |
 | CI builds and runs tests on every push | dotnet build, dotnet test, smoke tests and Docker SQL/Azurite checks |
 | 20 meaningful commits for this part | RunWayy default branch had 21 total commits when checked, but a count alone does not prove 20 meaningful API-development commits; historical Part 2 ZIP was MVC Identity rather than the required API |
-| README build screenshot and API YouTube demo | Build screenshot will be added from verified CI; current API video must be recorded by the student |
+| README build screenshot and API YouTube demo | Successful CI is linked in README; the required literal screenshot and current API video still need to be supplied |
 
 ## Part 3
 
@@ -37,6 +37,7 @@ MVC has no database/Azure SDK access. It calls the API for login, profiles, even
 
 ## Submission items still requiring the student
 
+- Save a screenshot of the linked successful GitHub Actions run and embed it in README (the live status link alone does not meet the screenshot requirement).
 - Demonstrate NEW profile/banner uploads against real Azure Blob Storage using the student subscription.
 - Record the required unlisted YouTube walkthroughs. The existing Part 2 submission document contains an older video link, but its relevance to the current REST API has not been verified; it is not presented as a new demonstration.
 - Provide actual video URLs in the README and submit the appropriate repository/video links in ARC.
