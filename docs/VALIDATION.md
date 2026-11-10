@@ -4,7 +4,7 @@
 - API and MVC build passed.
 - 96 integration checks passed locally against an isolated SQLite database.
 - Checks include submitting the original MVC event/category/enrolment/profile-photo forms, all role pages, image byte round trips, ownership, duplicate records, results and sign-out.
-- GitHub CI also runs these checks against Docker, SQL Server and Azurite; its final status must be recorded after the run.
+- GitHub CI passed all 96 checks against Docker, SQL Server and Azurite, including actual blob uploads/downloads and MVC forms. [Successful run](https://github.com/Sphelele20/RunWayy/actions/runs/42826770998).
 - Live Azure student storage remains unverified until your account is configured.
 - Local NuGet vulnerability lookup was unavailable (NU1900). No security-audit success is claimed.
 
@@ -16,7 +16,7 @@
 - Validated actual PNG/JPEG/WebP signatures and safe local filenames.
 - Enforced unique category names and result positions in the database.
 - Prevented changing a result-bearing enrolment away from Confirmed or rescheduling a result-bearing event.
-- Made deletion of an event and its entries/results transactional.
+- Made deletion of an event and its entries/results atomic in one SaveChanges call, compatible with SQL Server retry handling.
 - Added JWT revocation on logout and role changes.
 - Kept event times consistent in South Africa on Windows/Linux.
 - Removed production sample JWT secrets and automatic demo accounts.
