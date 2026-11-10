@@ -1,0 +1,42 @@
+@model OrganiserDashboardDto
+@{
+    ViewData["Title"] = "Organiser dashboard";
+}
+<div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2">
+    <h1 class="page-title mb-0">Organiser dashboard</h1>
+    <a class="btn btn-primary" asp-action="CreateEvent">+ Create event</a>
+</div>
+
+<div class="row g-3 my-3">
+    <div class="col-sm-4"><div class="stat-tile"><div class="stat-value">@Model.TotalEvents</div><div class="stat-label">Events created</div></div></div>
+    <div class="col-sm-4"><div class="stat-tile"><div class="stat-value">@Model.TotalEnrolments</div><div class="stat-label">Total enrolments</div></div></div>
+    <div class="col-sm-4"><div class="stat-tile"><div class="stat-value">@Model.PendingEnrolments</div><div class="stat-label">Waiting for confirmation</div></div></div>
+</div>
+
+<div class="rd-panel">
+    <h2 class="rd-panel-title">Upcoming events</h2>
+    @if (Model.UpcomingEvents.Count == 0)
+    {
+        <p class="text-muted mb-0">You have no upcoming events. <a asp-action="CreateEvent">Create one now.</a></p>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table align-middle mb-0">
+                <thead><tr><th>Event</th><th>Date</th><th>Location</th><th>Enrolled</th><th></th></tr></thead>
+                <tbody>
+                    @foreach (var e in Model.UpcomingEvents)
+                    {
+                        <tr>
+                            <td class="fw-semibold">@e.Name</td>
+                            <td>@e.Date.ToString("ddd, d MMM yyyy, HH:mm")</td>
+                            <td>@e.Location</td>
+                            <td>@e.EnrolmentCount</td>
+                            <td class="text-end"><a class="btn btn-sm btn-outline-primary" asp-action="Enrolments" asp-route-eventId="@e.Id">Enrolments</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

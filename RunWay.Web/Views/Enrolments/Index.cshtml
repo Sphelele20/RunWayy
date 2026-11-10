@@ -1,0 +1,40 @@
+@model List<EnrolmentDto>
+@{
+    ViewData["Title"] = "My enrolments";
+}
+<h1 class="page-title">My enrolments</h1>
+
+@if (Model.Count == 0)
+{
+    <div class="rd-panel text-center py-5">
+        <p class="lead">You have not enrolled in any events yet.</p>
+        <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Browse events</a>
+    </div>
+}
+else
+{
+    <div class="table-rd table-responsive">
+        <table class="table align-middle mb-0">
+            <thead><tr><th>Event</th><th>Date</th><th>Category</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+                @foreach (var e in Model)
+                {
+                    <tr>
+                        <td><a asp-controller="Events" asp-action="Details" asp-route-id="@e.EventId" class="fw-semibold">@e.EventName</a><div class="small text-muted">@e.EventLocation</div></td>
+                        <td>@e.EventDate.ToString("d MMM yyyy, HH:mm")</td>
+                        <td>@e.CategoryName <span class="text-muted small">(@e.CategoryDistanceKm.ToString("0.#") km)</span></td>
+                        <td><partial name="_StatusBadge" model="e.Status" /></td>
+                        <td class="text-end">
+                            @if (e.Status != EnrolmentStatus.Cancelled && !e.EventIsPast)
+                            {
+                                <form asp-action="Cancel" asp-route-id="@e.Id" method="post" onsubmit="return confirm('Cancel this enrolment?');">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Cancel</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

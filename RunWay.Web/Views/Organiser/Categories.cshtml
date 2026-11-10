@@ -1,0 +1,69 @@
+@model CategoriesPageViewModel
+@{
+    ViewData["Title"] = "Categories";
+    var editing = Model.Form.Id.HasValue;
+}
+<nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a asp-action="Events">Manage events</a></li><li class="breadcrumb-item active">@Model.Event.Name</li></ol></nav>
+<h1 class="page-title">Distance categories</h1>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="rd-panel">
+            <h2 class="rd-panel-title">@Model.Event.Name</h2>
+            @if (Model.Event.Categories.Count == 0)
+            {
+                <p class="text-muted mb-0">No categories yet. Add one so participants can enrol.</p>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                        <thead><tr><th>Name</th><th>Distance</th><th>Enrolled</th><th></th></tr></thead>
+                        <tbody>
+                            @foreach (var c in Model.Event.Categories)
+                            {
+                                <tr>
+                                    <td class="fw-semibold">@c.Name</td>
+                                    <td>@c.DistanceKm.ToString("0.#") km</td>
+                                    <td>@c.EnrolmentCount</td>
+                                    <td class="text-end text-nowrap">
+                                        <a class="btn btn-sm btn-outline-primary" asp-action="Categories" asp-route-eventId="@Model.Event.Id" asp-route-editId="@c.Id">Edit</a>
+                                        <form asp-action="DeleteCategory" asp-route-id="@c.Id" asp-route-eventId="@Model.Event.Id" method="post" class="d-inline"
+                                              onsubmit="return confirm('Delete this category?');">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="rd-panel">
+            <h2 class="rd-panel-title">@(editing ? "Edit category" : "Add category")</h2>
+            <form asp-action="SaveCategory" method="post" novalidate>
+                <input type="hidden" asp-for="Form.Id" />
+                <input type="hidden" asp-for="Form.EventId" />
+                <div class="mb-3">
+                    <label asp-for="Form.Name" class="form-label"></label>
+                    <input asp-for="Form.Name" class="form-control" maxlength="100" placeholder="e.g. 5 km Fun Run" />
+                    <span asp-validation-for="Form.Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Form.DistanceKm" class="form-label"></label>
+                    <input asp-for="Form.DistanceKm" type="number" step="0.1" min="0.1" class="form-control" />
+                    <span asp-validation-for="Form.DistanceKm" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">@(editing ? "Save category" : "Add category")</button>
+                @if (editing)
+                {
+                    <a asp-action="Categories" asp-route-eventId="@Model.Event.Id" class="btn btn-outline-secondary">Cancel</a>
+                }
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

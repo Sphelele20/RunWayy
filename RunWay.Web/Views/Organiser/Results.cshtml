@@ -1,0 +1,49 @@
+@model ResultsPageViewModel
+@{
+    ViewData["Title"] = "Results";
+    var ev = Model.Event;
+}
+<nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a asp-action="Events">Manage events</a></li><li class="breadcrumb-item active">@ev.Name</li></ol></nav>
+<h1 class="page-title">Race results</h1>
+<p class="text-muted">@ev.Name &middot; @ev.Date.ToString("d MMM yyyy")</p>
+
+@if (!ev.IsPast)
+{
+    <div class="alert alert-warning">Results can only be entered once the event has taken place.</div>
+}
+else if (Model.Rows.Count == 0)
+{
+    <div class="rd-panel text-center py-5">
+        <p class="lead mb-1">No confirmed participants.</p>
+        <p class="text-muted mb-0">Confirm enrolments first, then come back to capture finish times.</p>
+    </div>
+}
+else
+{
+    <p>Enter each runner's finish time (<code>hh:mm:ss</code>) and overall finishing position, then save. Saving publishes the result to the participant.</p>
+    <div class="table-rd table-responsive">
+        <table class="table align-middle mb-0">
+            <thead><tr><th>Participant</th><th>Category</th><th style="width:170px">Finish time</th><th style="width:120px">Position</th><th></th></tr></thead>
+            <tbody>
+                @foreach (var r in Model.Rows)
+                {
+                    <tr>
+                        <td class="fw-semibold">@r.ParticipantName</td>
+                        <td>@r.CategoryName</td>
+                        <td><input form="row-@r.EnrolmentId" name="finishTime" class="form-control form-control-sm" placeholder="00:52:31" pattern="\d{1,2}:\d{2}:\d{2}" value="@(r.FinishTime.HasValue ? r.FinishTime.Value.ToString("hh\\:mm\\:ss") : "")" required /></td>
+                        <td><input form="row-@r.EnrolmentId" name="position" type="number" min="1" class="form-control form-control-sm" value="@r.Position" required /></td>
+                        <td class="text-end"><button form="row-@r.EnrolmentId" type="submit" class="btn btn-sm btn-primary">@(r.Position.HasValue ? "Update" : "Save")</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @* One form per row, kept outside the table (inputs above point at them with the form="" attribute). *@
+    @foreach (var r in Model.Rows)
+    {
+        <form asp-action="SaveResult" method="post" id="row-@r.EnrolmentId">
+            <input type="hidden" name="eventId" value="@ev.Id" />
+            <input type="hidden" name="enrolmentId" value="@r.EnrolmentId" />
+        </form>
+    }
+}

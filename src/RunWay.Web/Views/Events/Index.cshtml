@@ -1,9 +1,0 @@
-@model List<EventDto>
-@{ViewData["Title"]="Find your next start line";}
-<section class="hero"><p class="eyebrow">YOUR NEXT CHALLENGE STARTS HERE</p><h1>Find your stride.<br/><em>Make it a RaceDay.</em></h1><p>Discover running, walking and cycling events. Choose your challenge and meet us at the start line.</p><span class="hero-number" aria-hidden="true">GO<br/>26</span></section>
-<section class="section-heading"><div><p class="eyebrow">THE CALENDAR</p><h2>Upcoming events</h2></div><span>@Model.Count events to explore</span></section>
-<form method="get" class="filter-bar"><div><label for="search">Event or location</label><input class="form-control" id="search" name="search" value="@ViewBag.Search" placeholder="Find your next race"/></div><div><label for="type">Sport</label><select class="form-select" id="type" name="type"><option value="">All sports</option>@foreach(var type in new[]{"Running","Walking","Cycling"}){<option value="@type" selected="@(ViewBag.Type==type)">@type</option>}</select></div><button class="btn btn-primary" type="submit">Find events →</button><a asp-action="Index">Clear</a></form>
-@if(Model.Count==0){<div class="empty"><h3>No events found</h3><p>Try another search, or check back for the next race.</p></div>}
-<div class="event-grid">@foreach(var e in Model){<article class="event-card">
-@if(e.BannerUrl!=null){<img class="event-cover" src="@e.BannerUrl" alt="@e.Name event banner"/>}else{<div class="event-placeholder" aria-hidden="true">@e.EventType.ToUpper()<strong>@e.Distance<small>KM</small></strong></div>}
-<div class="card-content"><p class="eyebrow">@e.EventType · @e.Date.ToString("dd MMM yyyy")</p><h3>@e.Name</h3><p>@e.Location · @e.Distance km</p><a class="btn btn-outline-dark" asp-action="Details" asp-route-id="@e.Id">View event →</a></div></article>}</div>

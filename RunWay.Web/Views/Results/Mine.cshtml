@@ -1,0 +1,34 @@
+@model List<ResultDto>
+@{
+    ViewData["Title"] = "My results";
+}
+<h1 class="page-title">My results</h1>
+
+@if (Model.Count == 0)
+{
+    <div class="rd-panel text-center py-5">
+        <p class="lead mb-1">No race results yet.</p>
+        <p class="text-muted">Results appear here once an organiser publishes them for events you finished.</p>
+        <a class="btn btn-primary" asp-controller="Enrolments" asp-action="Index">View my enrolments</a>
+    </div>
+}
+else
+{
+    <div class="table-rd table-responsive">
+        <table class="table align-middle mb-0">
+            <thead><tr><th>Event</th><th>Date</th><th>Category</th><th>Finish time</th><th>Position</th></tr></thead>
+            <tbody>
+                @foreach (var r in Model)
+                {
+                    <tr>
+                        <td><a asp-controller="Events" asp-action="Details" asp-route-id="@r.EventId" class="fw-semibold">@r.EventName</a></td>
+                        <td>@r.EventDate.ToString("d MMM yyyy")</td>
+                        <td>@r.CategoryName</td>
+                        <td class="fw-semibold">@UiHelpers.FormatTime(r.FinishTime)</td>
+                        <td><span class="position-badge @(r.Position == 1 ? "position-1" : "")">@r.Position</span> <span class="text-muted">@UiHelpers.Ordinal(r.Position) of @r.TotalFinishers finishers</span></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

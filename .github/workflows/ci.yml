@@ -1,11 +1,11 @@
-name: Part 3 build and integration
+name: RaceDay Part 3
 on:
   push:
   pull_request:
 permissions:
   contents: read
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,18 +14,25 @@ jobs:
           dotnet-version: 9.0.x
       - run: dotnet restore RunWayy.sln
       - run: dotnet build RunWayy.sln -c Release --no-restore
-      - name: Exercise API and MVC together
+      - name: API and original MVC workflows (SQLite)
         run: dotnet run --project tests/RunWay.Smoke -c Release --no-build -- "$PWD" Release
-  containers:
+  docker:
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
       - run: docker compose build
       - run: docker compose up -d
-      - name: Wait for API and MVC
+      - name: Wait for SQL Server, API and MVC
         run: |
-          curl --fail --retry 30 --retry-all-errors --retry-delay 2 http://localhost:5100/health
-          curl --fail --retry 30 --retry-all-errors --retry-delay 2 http://localhost:5200/health
-          curl --fail http://localhost:5200/Account/Login
+          curl --fail --retry 60 --retry-all-errors --retry-delay 3 http://localhost:5001/health
+          curl --fail --retry 30 --retry-all-errors --retry-delay 2 http://localhost:5000/health
+      - name: Build integration runner
+        run: dotnet build tests/RunWay.Smoke -c Release
+      - name: Real SQL Server and Azurite upload/download checks
+        run: dotnet run --project tests/RunWay.Smoke -c Release --no-build -- "$PWD" Release http://localhost:5001/ http://localhost:5000/
       - if: always()
         run: docker compose logs && docker compose down

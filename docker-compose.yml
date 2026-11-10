@@ -1,0 +1,59 @@
+# Start the whole RaceDay platform with ONE command:
+#     docker compose up --build
+# Web (MVC):  http://localhost:5000      API (Swagger): http://localhost:5001/swagger
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "${SA_PASSWORD:-RaceDay_Pass123!}"
+    volumes:
+      - sqldata:/var/opt/mssql
+    restart: unless-stopped
+
+  azurite:
+    # Local stand-in for Azure Blob Storage. For real Azure, set AZURE_STORAGE_CONNECTION_STRING (see README).
+    image: mcr.microsoft.com/azure-storage/azurite
+    command: azurite-blob --blobHost 0.0.0.0 --skipApiVersionCheck --loose
+    volumes:
+      - blobdata:/data
+    restart: unless-stopped
+
+  api:
+    build: ./RunWay.Api
+    volumes:
+      - api-keys:/keys
+    depends_on:
+      - sqlserver
+      - azurite
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=RaceDayDB;User Id=sa;Password=${SA_PASSWORD:-RaceDay_Pass123!};TrustServerCertificate=True;MultipleActiveResultSets=true"
+      Jwt__Key: "${JWT_KEY:-RaceDay-docker-demo-signing-key-change-me-0123456789}"
+      Jwt__Issuer: "RaceDay.Api"
+      Jwt__Audience: "RaceDay.Web"
+      AzureStorage__ConnectionString: "${AZURE_STORAGE_CONNECTION_STRING:-DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://azurite:10000/devstoreaccount1;}"
+      AzureStorage__ContainerName: "raceday-images"
+      Seed__DemoData: "true"
+    ports:
+      - "5001:8080"
+    restart: unless-stopped
+
+  web:
+    build: ./RunWay.Web
+    volumes:
+      - web-keys:/keys
+    depends_on:
+      - api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      Api__BaseUrl: "http://api:8080/"
+    ports:
+      - "5000:8080"
+    restart: unless-stopped
+
+volumes:
+  sqldata:
+  blobdata:
+  api-keys:
+  web-keys:

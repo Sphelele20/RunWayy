@@ -1,0 +1,23 @@
+@model List<ManageUserRolesViewModel>
+@{
+    ViewData["Title"] = "Manage user roles";
+    var userId = ViewBag.userId as string;
+}
+<h1 class="page-title">Manage roles</h1>
+<p class="text-muted">User: <strong>@ViewBag.UserName</strong></p>
+
+<form method="post" asp-action="Manage" asp-route-userId="@userId" class="rd-panel" style="max-width:480px">
+    <h2 class="rd-panel-title">Add / remove roles</h2>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <div class="form-check mb-2">
+            <input type="hidden" asp-for="@Model[i].RoleName" />
+            <input asp-for="@Model[i].IsSelected" class="form-check-input" />
+            <label class="form-check-label" asp-for="@Model[i].IsSelected">@Model[i].RoleName</label>
+        </div>
+    }
+    <div class="mt-3 d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Update roles</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+</form>

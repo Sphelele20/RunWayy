@@ -1,5 +1,0 @@
-@model List<EnrolmentDto>
-@{ViewData["Title"]="My results";}
-<p class="eyebrow">EVERY FINISH TELLS A STORY</p><h1>Your race.<br/><em>Your results.</em></h1><p>Your personal history, published by event organisers.</p>
-@if(Model.Count==0){<p class="empty">Your results will appear here when an organiser publishes them after an event.</p>}
-<div class="table-responsive"><table class="table"><thead><tr><th>Event</th><th>Date</th><th>Category</th><th>Finish time</th><th>Position</th></tr></thead><tbody>@foreach(var n in Model){<tr><td>@n.EventName</td><td>@n.Date.ToString("dd MMM yyyy")</td><td>@n.Category</td><td><strong>@n.FinishTime</strong></td><td>#@n.Position</td></tr>}</tbody></table></div>

@@ -1,60 +1,103 @@
-# RunWayy · RaceDay Part 3
+# RaceDay (RunWay) – PROG6212 POE Part 3
 
-RaceDay is an ASP.NET Core MVC frontend backed by a REST API for running, walking and cycling events. It continues the RunWayy coursework and keeps the earlier MVC Identity source in `legacy/Part2`.
+RaceDay is a platform for organising and joining running events. Part 3 delivers the **ASP.NET Core MVC front end**
+that consumes the **REST API**, with **Azure Blob Storage** for images, everything **containerised with Docker**.
 
-## Start without Docker
+| Project | What it is |
+|---|---|
+| `RunWay.Api` | ASP.NET Core Web API (.NET 9). Owns the SQL Server database, ASP.NET Core Identity + JWT, business rules, and **all** Azure Blob Storage access. Swagger at `/swagger`. |
+| `RunWay.Web` | ASP.NET Core MVC (.NET 9). **No database or Azure code** – it only calls the API over HTTP (`HttpClient`) and holds the user's JWT in server-side session. |
 
-Install the .NET 9 SDK. From this folder:
-
-```powershell
-dotnet build RunWayy.sln
-$env:ASPNETCORE_ENVIRONMENT="Development"
-dotnet run --project src/RunWay.Api --no-launch-profile --urls http://localhost:5100
+```
+Browser ──> RunWay.Web (MVC) ──HTTP + JWT──> RunWay.Api ──> SQL Server
+                                                   └──────> Azure Blob Storage (Azurite locally)
 ```
 
-In a second PowerShell terminal:
+## Start here: your supplied design is preserved
 
-```powershell
-$env:ASPNETCORE_ENVIRONMENT="Development"
-dotnet run --project src/RunWay.Web --no-launch-profile --urls http://localhost:5200
-```
+See [START-HERE.md](docs/START-HERE.md) to run immediately without Docker using the original demo races and accounts. See [validation](docs/VALIDATION.md) for completed checks and [Azure student setup](docs/AZURE-STUDENT-SETUP.md) for your subscription.
 
-Visit **http://localhost:5200**. Register an Organiser to create an event, add categories and upload a banner. Register a separate Participant to enter it and update a profile. There are no seeded passwords. API Swagger is at **http://localhost:5100/swagger** in Development.
+## Run it with Docker (one command)
 
-On Windows you can also run `./scripts/start-local.ps1`. Stop it with Ctrl+C. Local development uses an API-owned SQLite database and local images; no SQL Server, Azure account or Docker is needed to begin. Dates entered and displayed are **UTC** (subtract two hours from South African time).
+Requires Docker Desktop. From the repository root:
 
-## Docker: one command
-
-```sh
+```bash
 docker compose up --build
 ```
 
-Open **http://localhost:5200**. Both services run as a non-root user. Named volumes persist the API database/images and MVC cookie keys. The default container configuration explicitly permits local images for parity with local development. To demonstrate Azure Blob Storage, follow [Azure setup](docs/AZURE-STUDENT-SETUP.md) and change the storage settings; local storage is not evidence of Azure integration.
+Then open:
 
-If Docker reports that Virtual Machine Platform is disabled, follow [the Windows Docker guide](docs/DOCKER-WINDOWS.md). You can keep developing with the commands above while resolving it.
+* **Web app:** http://localhost:5000
+* **API / Swagger:** http://localhost:5001/swagger
 
-## Structure
+The first start takes a minute or two (SQL Server starts, the database is created and demo data is seeded).
+This starts four containers: `web`, `api`, `sqlserver` and `azurite` (a local Azure Blob Storage emulator).
 
-- `src/RunWay.Web`: MVC controllers, views, role navigation, session and API client. No database access or Azure SDK.
-- `src/RunWay.Api`: Identity accounts, bearer sessions, EF Core persistence, ownership and business rules, image storage.
-- `src/RunWay.Contracts`: shared request/response shapes and input validation.
-- `tests/RunWay.Smoke`: executable integration checks against real API and MVC processes.
-- `legacy/Part2`: preserved earlier source with Windows-compatible filenames; excluded from the solution.
-- `docs`: architecture, review, API routes, Azure/Docker setup and submission checklist.
+Stop with `Ctrl+C`; `docker compose down -v` also removes the data volumes.
 
-## Checks
+### Using real Azure Blob Storage
+Copy `.env.example` to `.env` and set `AZURE_STORAGE_CONNECTION_STRING` to your storage account's connection string
+(the container `raceday-images` is created automatically), then run `docker compose up --build` again.
+Images are stored as private blobs and streamed to the browser through the API (`GET /api/files/...`), so the MVC app never talks to Azure.
 
-```sh
-dotnet build RunWayy.sln
-dotnet run --project tests/RunWay.Smoke -- .
-```
+## Run it without Docker (Visual Studio)
+1. Start SQL Server (LocalDB works) and Azurite (`npm i -g azurite` then `azurite-blob`), or use the student Azure instructions linked above. Keep connection strings in API user secrets/environment settings.
+2. Check `ConnectionStrings:DefaultConnection` in `RunWay.Api/appsettings.json`.
+3. Set both projects as startup projects (API on `http://localhost:5001`, MVC on `http://localhost:5000`) and press F5.
+   `RunWay.Web/appsettings.json` → `Api:BaseUrl` already points at the API.
 
-The test runner starts both applications on free loopback ports with a fresh temporary database. It checks roles, ownership, validation, duplicate enrolment, results, uploads, MVC sign-in and anti-forgery protection. It changes only its temporary database date to exercise a completed event. It does not touch your normal database.
+The API creates the database, the roles (Admin, Organiser, Participant), the admin user and demo data on first start.
+(If you add EF Core migrations later, they are applied automatically instead.)
 
-GitHub Actions builds both applications and the contracts, runs integration checks, then builds and starts both containers. See [validation status](docs/VALIDATION.md) for what has actually been verified in this delivery.
+## Demo accounts
 
-## Extending the project
+| Role | Email | Password |
+|---|---|---|
+| Admin | `admin@admin.com` | `Admin@123` |
+| Organiser | `organiser@raceday.com` | `Organiser@123` |
+| Participant | `participant@raceday.com` | `Participant@123` |
 
-Read [architecture and migration notes](docs/ARCHITECTURE.md) before changing storage or authentication. Existing Part 2 accounts are not automatically imported. The initial API schema is separate from the old RunWayDB and RaceDay SQL script. Use a new empty database for first startup; `EnsureCreated` does not upgrade an existing schema. Back up data and introduce reviewed EF migrations before changing a deployed schema.
+Demo data (5 events – 3 upcoming, 2 finished with published results – plus categories and enrolments) is seeded when
+`Seed__DemoData=true` (default in `docker-compose.yml`). Change the passwords and the JWT key before any real deployment.
 
-This project retains the repository's .NET 9 target. Plan and test a move to a supported SDK/runtime before long-term deployment. Use HTTPS at your hosting proxy for any public deployment; local HTTP addresses here are for development.
+## Requirements checklist
+
+| Requirement | Where |
+|---|---|
+| MVC consumes the Part 2 API, no DB access in MVC | `RunWay.Web/Services/RaceDayApiClient.cs`; `RunWay.Web.csproj` has no EF/SQL packages |
+| Register / login via API, auth state + role kept across pages (session) | `AccountController`, JWT in server session + auth cookie (`Program.cs`) |
+| Role-specific navigation, protected pages, logout | `_Layout.cshtml`, `[Authorize(Roles=...)]` on controllers |
+| Organiser: dashboard, events CRUD + banner, categories, enrolments, results | `OrganiserController` + `Views/Organiser` |
+| Participant: browse/filter events, event page, enrol with category, my enrolments, my results, profile + picture | `HomeController`, `EventsController`, `EnrolmentsController`, `ResultsController`, `ProfileController` |
+| Azure Blob Storage only through the API | `RunWay.Api/Services/FileStorage.cs`, `EventsController.UploadBanner`, `ProfileController.UploadPicture`, `FilesController` |
+| Docker + README run command | `RunWay.*/Dockerfile`, `docker-compose.yml` |
+| RaceDay UI, Bootstrap, colour-coded statuses, friendly errors | `wwwroot/css/site.css`, `_StatusBadge.cshtml`, `RaceDayApiClient` error handling |
+| GitHub Actions builds API + MVC | `.github/workflows/ci.yml` |
+
+## Main API endpoints
+
+| Method & route | Access |
+|---|---|
+| `POST /api/auth/register`, `POST /api/auth/login` | public |
+| `GET /api/events` (filters: `search, eventType, from, to, minDistance, maxDistance`), `GET /api/events/{id}` | public |
+| `POST/PUT/DELETE /api/events`, `POST /api/events/{id}/banner`, `GET /api/events/mine` | Organiser (owner) / Admin |
+| `GET/POST /api/events/{id}/categories`, `PUT/DELETE /api/categories/{id}` | Organiser (owner) / Admin |
+| `POST /api/enrolments`, `GET /api/enrolments/mine`, `PUT /api/enrolments/{id}/cancel` | Participant |
+| `GET /api/events/{id}/enrolments`, `PUT /api/enrolments/{id}/status` | Organiser (owner) / Admin |
+| `GET /api/events/{id}/results`, `GET /api/results/mine`, `PUT /api/results`, `DELETE /api/results/{enrolmentId}` | public / Participant / Organiser |
+| `GET/PUT /api/profile`, `POST /api/profile/picture` | any signed-in user |
+| `GET /api/dashboard/organiser`, `GET /api/dashboard/admin`, `GET /api/admin/users`, `PUT /api/admin/users/{id}/roles` | Organiser / Admin |
+| `GET /api/files/{blobName}` | public (images only) |
+
+## Business rules
+* Enrolling records a **Pending** enrolment immediately; the organiser can **Confirm** or **Cancel** it. Colours: green = Confirmed, amber = Pending, grey = Cancelled.
+* One enrolment per participant per event; enrolment closes when the event date passes.
+* Results can only be entered after the event, for **Confirmed** participants, with a unique position per event.
+  "My Results" shows e.g. *47th of 312 finishers*.
+* Only the organiser who created an event (or an Admin) can change it.
+
+## Submission checklist
+* Push to GitHub on a clearly named branch (e.g. `part3`) with at least 20 meaningful commits.
+* Add your GitHub link and the **unlisted YouTube video link** here: <!-- GitHub: ... --> <!-- YouTube: ... -->
+* In the video: run `docker compose up --build`, show registration/login for each role, the MVC structure
+  (controllers → `RaceDayApiClient` → API), an image upload appearing from Blob Storage, and the Docker setup.

@@ -1,5 +1,0 @@
-@model List<EnrolmentDto>
-@{ViewData["Title"]="My entries";}
-<p class="eyebrow">YOUR NEXT CHALLENGES</p><h1>You're on<br/><em>the start list.</em></h1><p>All your event entries, in one place.</p>
-@if(Model.Count==0){<p class="empty">No entries yet. <a asp-controller="Events" asp-action="Index">Find your first event →</a></p>}
-<div class="table-responsive"><table class="table"><thead><tr><th>Event</th><th>Date (UTC)</th><th>Category</th><th>Status</th></tr></thead><tbody>@foreach(var n in Model){<tr><td><a asp-controller="Events" asp-action="Details" asp-route-id="@n.EventId">@n.EventName</a></td><td>@n.Date.ToString("dd MMM yyyy, HH:mm")</td><td>@n.Category</td><td><span class="status @n.Status.ToLowerInvariant()">@n.Status</span></td></tr>}</tbody></table></div>

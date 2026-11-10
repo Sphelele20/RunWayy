@@ -1,0 +1,31 @@
+@model AdminDashboardDto
+@{
+    ViewData["Title"] = "Admin dashboard";
+}
+<h1 class="page-title">Admin dashboard</h1>
+
+<div class="row g-3 mb-4">
+    <div class="col-sm-4"><div class="stat-tile"><div class="stat-value">@Model.TotalUsers</div><div class="stat-label">Users</div></div></div>
+    <div class="col-sm-4"><div class="stat-tile"><div class="stat-value">@Model.TotalEvents</div><div class="stat-label">Events</div></div></div>
+    <div class="col-sm-4"><div class="stat-tile"><div class="stat-value">@Model.TotalEnrolments</div><div class="stat-label">Active enrolments</div></div></div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="rd-panel h-100">
+            <h2 class="rd-panel-title">Users by role</h2>
+            <ul class="list-group list-group-flush">
+                @foreach (var kv in Model.UsersByRole)
+                {
+                    <li class="list-group-item d-flex justify-content-between"><span>@kv.Key</span><strong>@kv.Value</strong></li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="rd-panel h-100">
+            <h2 class="rd-panel-title">Manage</h2>
+            <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Index">Manage user roles</a>
+        </div>
+    </div>
+</div>

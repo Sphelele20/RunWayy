@@ -1,7 +1,0 @@
-@model ProfileRequest
-@{ViewData["Title"]="My profile";var profile=(ProfileDto)ViewBag.Profile;}
-<p class="eyebrow">YOUR RACEDAY</p><h1>My profile</h1>
-<form method="post" enctype="multipart/form-data" class="panel narrow"><div asp-validation-summary="All" class="text-danger" role="alert"></div>
-@if(profile.ImageUrl!=null){<img class="avatar" src="@profile.ImageUrl" alt="Your profile photo"/>}
-<p>@profile.Email · @profile.Role</p><label asp-for="FirstName">First name</label><input asp-for="FirstName" class="form-control"/><label asp-for="LastName">Last name</label><input asp-for="LastName" class="form-control"/><label asp-for="PhoneNumber">Phone number</label><input asp-for="PhoneNumber" class="form-control"/><label asp-for="Gender"></label><select asp-for="Gender" class="form-select"><option>PreferNotToSay</option><option>Female</option><option>Male</option><option>Other</option></select>
-<label for="image">Profile picture (PNG or JPEG, up to 2 MB)</label><input type="file" name="image" id="image" accept="image/png,image/jpeg" class="form-control"/><button class="btn btn-primary mt-4" type="submit">Save profile</button></form>

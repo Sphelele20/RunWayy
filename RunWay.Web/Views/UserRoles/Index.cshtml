@@ -1,0 +1,31 @@
+@model List<UserRolesViewModel>
+@{
+    ViewData["Title"] = "Users & roles";
+}
+<h1 class="page-title">Users &amp; roles</h1>
+
+<div class="table-rd table-responsive">
+    <table class="table align-middle mb-0">
+        <thead><tr><th>Name</th><th>Email</th><th>Roles</th><th style="width:160px"></th></tr></thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td class="fw-semibold">@user.FullName</td>
+                    <td>@user.Email</td>
+                    <td>
+                        @if (user.Roles.Any())
+                        {
+                            foreach (var r in user.Roles) { <span class="type-pill me-1">@r</span> }
+                        }
+                        else
+                        {
+                            <span class="text-muted">No roles</span>
+                        }
+                    </td>
+                    <td class="text-end"><a asp-action="Manage" asp-route-userId="@user.UserId" class="btn btn-sm btn-outline-primary">Manage roles</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,32 @@
+@{
+    var image = UiHelpers.ImageUrl(User.FindFirst("profile_image")?.Value);
+    var roles = string.Join(", ", User.FindAll(System.Security.Claims.ClaimTypes.Role).Select(c => c.Value));
+}
+<ul class="navbar-nav align-items-lg-center">
+@if (User.Identity?.IsAuthenticated == true)
+{
+    <li class="nav-item d-flex align-items-center">
+        <a class="nav-link d-flex align-items-center gap-2" asp-controller="Profile" asp-action="Index" title="My profile (@roles)">
+            @if (image != null)
+            {
+                <img src="@image" alt="" class="nav-avatar" />
+            }
+            else
+            {
+                <span class="nav-avatar nav-avatar-fallback">@(User.Identity?.Name?.Substring(0, 1).ToUpper())</span>
+            }
+            <span>@User.Identity?.Name</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+            <button type="submit" class="btn btn-outline-light btn-sm ms-lg-2">Log out</button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Login">Log in</a></li>
+    <li class="nav-item"><a class="btn btn-primary btn-sm ms-lg-2" asp-controller="Account" asp-action="Register">Sign up</a></li>
+}
+</ul>

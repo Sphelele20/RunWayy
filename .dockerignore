@@ -1,9 +1,0 @@
-**/bin
-**/obj
-.git
-legacy
-work
-**/*.db*
-**/App_Data
-.env
-.env.*

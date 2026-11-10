@@ -1,23 +1,24 @@
-# Validation status
+# Verification of the supplied POE website
 
-Checked on 10 November 2026.
+- Original site.css retained byte-for-byte. Existing page structure and theme retained.
+- API and MVC build passed.
+- 96 integration checks passed locally against an isolated SQLite database.
+- Checks include submitting the original MVC event/category/enrolment/profile-photo forms, all role pages, image byte round trips, ownership, duplicate records, results and sign-out.
+- GitHub CI also runs these checks against Docker, SQL Server and Azurite; its final status must be recorded after the run.
+- Live Azure student storage remains unverified until your account is configured.
+- Local NuGet vulnerability lookup was unavailable (NU1900). No security-audit success is claimed.
 
-| Check | Result |
-|---|---|
-| .NET 9 Debug build: API, MVC, Contracts, Smoke | Passed |
-| .NET 9 Release build | Passed |
-| Real-process integration checks | 52 passed in Debug and Release |
-| Browser rendering | Upcoming-events page visually inspected at the available narrow viewport |
-| Local PNG/JPEG banner/profile upload | Passed; fake/oversized uploads rejected |
-| Role/ownership/duplicate enrolment/results/CSRF/logout checks | Passed |
-| NuGet advisory audit | Unavailable: host could not reach NuGet advisory service (NU1900) |
-| Docker build/runtime | Passed in GitHub Actions: both images built, Compose started, API/MVC health and sign-in page checks passed; not run locally |
-| Live Azure Blob Storage | Not run: student subscription and storage identity must be configured |
-| SQL Server provider | Configured, not tested; test suite uses SQLite |
-| ERD Word diagram | Not visually verified: connector returned empty large-binary content; direct download failed TLS |
+## Fixes to the supplied code
 
-The test runner starts both applications, uses temporary test accounts/data and verifies API responses plus authenticated MVC pages. It backdates only its isolated test event to verify result publishing after an event. It does not claim live Azure or Docker success.
-
-[GitHub Actions verification](https://github.com/Sphelele20/RunWayy/actions/runs/42819995470) passed for both build-and-test and containers jobs on the implementation commit.
-
-Run the Azure verification in AZURE-STUDENT-SETUP.md before submitting. Record your own demonstration and actual YouTube URL.
+- Corrected decimal/double multiplication that prevented demo-data compilation.
+- Added development-only SQLite/local images so the site can run without Docker.
+- Kept production SQL Server and API-owned Azure storage; added managed identity support.
+- Validated actual PNG/JPEG/WebP signatures and safe local filenames.
+- Enforced unique category names and result positions in the database.
+- Prevented changing a result-bearing enrolment away from Confirmed or rescheduling a result-bearing event.
+- Made deletion of an event and its entries/results transactional.
+- Added JWT revocation on logout and role changes.
+- Kept event times consistent in South Africa on Windows/Linux.
+- Removed production sample JWT secrets and automatic demo accounts.
+- Corrected the original Azurite account key and non-root container key-directory permissions.
+- Bundled Bootstrap and core scripts locally without changing the design. Google Fonts and the unobtrusive validation script retain their existing CDN sources; server validation remains active.
