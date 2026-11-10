@@ -94,15 +94,15 @@ public static class DbSeeder
         var events = new List<Event>
         {
             new() { Name = "Sunrise 10K Road Run", Description = "A fast, flat road race along the waterfront at sunrise. Perfect for chasing a personal best.",
-                    Date = today.AddDays(21).AddHours(6), Location = "Sea Point Promenade, Cape Town", DistanceKm = 10, EventType = EventType.Road, OrganiserId = organiser.Id },
+                    Date = today.AddDays(21).AddHours(6), Location = "Sea Point Promenade, Cape Town", DistanceKm = 10, EventType = EventType.Run, OrganiserId = organiser.Id },
             new() { Name = "Drakensberg Trail Challenge", Description = "Technical single-track and big climbs through the foothills. Bring trail shoes and a sense of adventure.",
-                    Date = today.AddDays(45).AddHours(7), Location = "Champagne Valley, KwaZulu-Natal", DistanceKm = 21, EventType = EventType.Trail, OrganiserId = organiser.Id },
+                    Date = today.AddDays(45).AddHours(7), Location = "Champagne Valley, KwaZulu-Natal", DistanceKm = 21, EventType = EventType.Run, OrganiserId = organiser.Id },
             new() { Name = "Spring Family Fun Run", Description = "Walk, jog or run with family and friends. Medals for every finisher!",
-                    Date = today.AddDays(10).AddHours(8), Location = "Zoo Lake, Johannesburg", DistanceKm = 5, EventType = EventType.FunRun, OrganiserId = organiser.Id },
+                    Date = today.AddDays(10).AddHours(8), Location = "Zoo Lake, Johannesburg", DistanceKm = 5, EventType = EventType.Walk, OrganiserId = organiser.Id },
             new() { Name = "City Lights Half Marathon", Description = "Last month's evening half marathon through the city centre.",
-                    Date = today.AddDays(-30).AddHours(17), Location = "Durban Beachfront", DistanceKm = 21.1m, EventType = EventType.Road, OrganiserId = organiser.Id },
+                    Date = today.AddDays(-30).AddHours(17), Location = "Durban Beachfront", DistanceKm = 21.1m, EventType = EventType.Run, OrganiserId = organiser.Id },
             new() { Name = "Winter Warm-Up 10K", Description = "A cold-morning classic that kicked off the season.",
-                    Date = today.AddDays(-75).AddHours(7), Location = "Pretoria Botanical Gardens", DistanceKm = 10, EventType = EventType.Road, OrganiserId = organiser.Id },
+                    Date = today.AddDays(-75).AddHours(7), Location = "Pretoria Botanical Gardens", DistanceKm = 10, EventType = EventType.Run, OrganiserId = organiser.Id },
         };
         db.Events.AddRange(events);
         await db.SaveChangesAsync();

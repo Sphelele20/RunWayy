@@ -37,7 +37,8 @@ public class EventsController : ControllerBase
             var s = filter.Search.Trim();
             query = query.Where(e => e.Name.Contains(s) || e.Location.Contains(s) || e.Description.Contains(s));
         }
-        if (filter.EventType.HasValue) query = query.Where(e => e.EventType == filter.EventType.Value);
+        if (filter.EventType == EventType.Run) query = query.Where(e => e.EventType != EventType.Walk && e.EventType != EventType.Cycle);
+        else if (filter.EventType.HasValue) query = query.Where(e => e.EventType == filter.EventType.Value);
         if (filter.From.HasValue) query = query.Where(e => e.Date >= filter.From.Value.Date);
         if (filter.To.HasValue) query = query.Where(e => e.Date < filter.To.Value.Date.AddDays(1));
         if (filter.MinDistance.HasValue)
@@ -153,4 +154,3 @@ public class EventsController : ControllerBase
         return Ok(updated.ToDto(includeCategories: true));
     }
 }
-

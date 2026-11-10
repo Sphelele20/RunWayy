@@ -101,3 +101,21 @@ Demo data (5 events – 3 upcoming, 2 finished with published results – plus c
 * Add your GitHub link and the **unlisted YouTube video link** here: <!-- GitHub: ... --> <!-- YouTube: ... -->
 * In the video: run `docker compose up --build`, show registration/login for each role, the MVC structure
   (controllers → `RaceDayApiClient` → API), an image upload appearing from Blob Storage, and the Docker setup.
+
+## Question paper alignment
+
+See the [full requirements audit](docs/REQUIREMENTS-AUDIT.md). Planning deliverables are in [docs](docs/README.md): the ERD PNG, full endpoint plan and SQL Server script with sample users/events/results.
+
+The updated implementation has 11 tables: seven standard ASP.NET Identity tables plus Events, Categories, Enrolments and Results. The old Part 1 seven-table design used a global category/junction arrangement; the current design has event-owned distance categories. Results includes EventId to enforce unique event positions, and Identity replaces the old Users/Roles/password layout. The ERD and SQL are exported from the current EF Code First model, so their attributes and relationships agree. Use a fresh development database or reviewed migrations for older data.
+
+Event forms support **Run, Walk and Cycle**, as required. Existing Road/Trail/FunRun demo records remain readable as running events.
+
+Run formal unit tests with:
+```sh
+dotnet test RunWayy.sln
+```
+The 17 xUnit controller cases complement the 96 HTTP/MVC integration checks. CI executes both suites and also runs the standalone planning SQL on SQL Server.
+
+Repository: https://github.com/Sphelele20/RunWayy/tree/part3/raceday-mvc-api
+
+Required walkthrough videos: Part 1 planning/SSMS, Part 2 running API/unit tests, Part 3 MVC/Azure/Docker. Record your current implementation and add your actual unlisted URLs here before ARC submission. Historical per-part commit requirements and pre-coding planning cannot be inferred from a passing build; see the audit.

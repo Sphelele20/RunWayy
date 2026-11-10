@@ -20,7 +20,7 @@ public static class Mapping
         Date = e.Date,
         Location = e.Location,
         DistanceKm = e.DistanceKm,
-        EventType = e.EventType,
+        EventType = e.EventType is EventType.Walk or EventType.Cycle ? e.EventType : EventType.Run,
         BannerImage = e.BannerBlobName,
         OrganiserId = e.OrganiserId,
         OrganiserName = e.Organiser?.FullName ?? string.Empty,

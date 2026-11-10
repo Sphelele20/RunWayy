@@ -83,6 +83,8 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
+    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "RunWay.Api.xml"));
+    c.OperationFilter<EndpointDocumentation>();
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "RaceDay API", Version = "v1" });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {

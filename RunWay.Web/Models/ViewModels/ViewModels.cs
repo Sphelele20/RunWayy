@@ -124,7 +124,8 @@ public class EventFormViewModel
     public decimal? DistanceKm { get; set; }
 
     [Display(Name = "Event type")]
-    public EventType EventType { get; set; }
+    [AllowedValues(EventType.Run, EventType.Walk, EventType.Cycle)]
+    public EventType EventType { get; set; } = EventType.Run;
 
     [Display(Name = "Banner image")]
     public IFormFile? Banner { get; set; }

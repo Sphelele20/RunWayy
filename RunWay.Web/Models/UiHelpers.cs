@@ -19,6 +19,7 @@ public static class UiHelpers
         return (n % 10) switch { 1 => n + "st", 2 => n + "nd", 3 => n + "rd", _ => n + "th" };
     }
 
+    public static EventType[] EventTypes => new[] { EventType.Run, EventType.Walk, EventType.Cycle };
     public static string TypeLabel(EventType t) => t switch
     {
         EventType.FunRun => "Fun Run",

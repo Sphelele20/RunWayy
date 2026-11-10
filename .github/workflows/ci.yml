@@ -1,4 +1,4 @@
-name: RaceDay Part 3
+name: RaceDay POE verification
 on:
   push:
   pull_request:
@@ -14,6 +14,10 @@ jobs:
           dotnet-version: 9.0.x
       - run: dotnet restore RunWayy.sln
       - run: dotnet build RunWayy.sln -c Release --no-restore
+      - name: Unit tests
+        run: dotnet test RunWayy.sln -c Release --no-build --logger "trx;LogFileName=unit-tests.trx"
+      - name: Validate planning package
+        run: pwsh -File scripts/validate-planning.ps1
       - name: API and original MVC workflows (SQLite)
         run: dotnet run --project tests/RunWay.Smoke -c Release --no-build -- "$PWD" Release
   docker:
@@ -32,6 +36,10 @@ jobs:
           curl --fail --retry 30 --retry-all-errors --retry-delay 2 http://localhost:5000/health
       - name: Build integration runner
         run: dotnet build tests/RunWay.Smoke -c Release
+      - name: Validate standalone SQL script on clean SQL Server
+        run: |
+          docker compose cp docs/RaceDay_Schema.sql sqlserver:/tmp/RaceDay_Schema.sql
+          docker compose exec -T sqlserver /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "RaceDay_Pass123!" -C -b -i /tmp/RaceDay_Schema.sql
       - name: Real SQL Server and Azurite upload/download checks
         run: dotnet run --project tests/RunWay.Smoke -c Release --no-build -- "$PWD" Release http://localhost:5001/ http://localhost:5000/
       - if: always()

@@ -19,7 +19,7 @@
             <div class="col-md-4">
                 <label asp-for="EventType" class="form-label"></label>
                 <select asp-for="EventType" class="form-select">
-                    @foreach (var t in Enum.GetValues<EventType>())
+                    @foreach (var t in UiHelpers.EventTypes)
                     {
                         <option value="@t" selected="@(Model.EventType == t)">@UiHelpers.TypeLabel(t)</option>
                     }

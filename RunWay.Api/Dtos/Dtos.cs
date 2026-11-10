@@ -72,7 +72,7 @@ public class EventRequest
     [Required] public DateTime Date { get; set; }
     [Required, MaxLength(200)] public string Location { get; set; } = string.Empty;
     [Range(0.1, 1000)] public decimal DistanceKm { get; set; }
-    [EnumDataType(typeof(EventType))] public EventType EventType { get; set; }
+    [EnumDataType(typeof(EventType)), AllowedValues(EventType.Run, EventType.Walk, EventType.Cycle)] public EventType EventType { get; set; } = EventType.Run;
 }
 
 public class CategoryRequest
@@ -98,7 +98,7 @@ public class EventDto
     public DateTime Date { get; set; }
     public string Location { get; set; } = string.Empty;
     public decimal DistanceKm { get; set; }
-    [EnumDataType(typeof(EventType))] public EventType EventType { get; set; }
+    [EnumDataType(typeof(EventType)), AllowedValues(EventType.Run, EventType.Walk, EventType.Cycle)] public EventType EventType { get; set; } = EventType.Run;
     public string? BannerImage { get; set; }
     public string OrganiserId { get; set; } = string.Empty;
     public string OrganiserName { get; set; } = string.Empty;

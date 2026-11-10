@@ -5,7 +5,8 @@ namespace RunWay.Api.Data;
 
 public enum Gender { Male, Female, Other, PreferNotToSay }
 
-public enum EventType { Road, Trail, FunRun, Marathon, Relay }
+// Legacy running subtypes remain readable for existing demo databases.
+public enum EventType { Road, Trail, FunRun, Marathon, Relay, Run, Walk, Cycle }
 
 public enum EnrolmentStatus { Pending, Confirmed, Cancelled }
 

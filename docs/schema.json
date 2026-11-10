@@ -1,0 +1,689 @@
+[
+  {
+    "Name": "AspNetRoleClaims",
+    "Properties": [
+      {
+        "Name": "Id",
+        "Type": "int",
+        "Nullable": false,
+        "PrimaryKey": true,
+        "ForeignKey": false
+      },
+      {
+        "Name": "ClaimType",
+        "Type": "nvarchar(max)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "ClaimValue",
+        "Type": "nvarchar(max)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "RoleId",
+        "Type": "nvarchar(450)",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": true
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "Properties": [
+          "RoleId"
+        ],
+        "Parent": "AspNetRoles",
+        "ParentProperties": [
+          "Id"
+        ],
+        "Unique": false,
+        "Required": true
+      }
+    ]
+  },
+  {
+    "Name": "AspNetRoles",
+    "Properties": [
+      {
+        "Name": "Id",
+        "Type": "nvarchar(450)",
+        "Nullable": false,
+        "PrimaryKey": true,
+        "ForeignKey": false
+      },
+      {
+        "Name": "ConcurrencyStamp",
+        "Type": "nvarchar(max)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "Name",
+        "Type": "nvarchar(256)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "NormalizedName",
+        "Type": "nvarchar(256)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      }
+    ],
+    "ForeignKeys": []
+  },
+  {
+    "Name": "AspNetUserClaims",
+    "Properties": [
+      {
+        "Name": "Id",
+        "Type": "int",
+        "Nullable": false,
+        "PrimaryKey": true,
+        "ForeignKey": false
+      },
+      {
+        "Name": "ClaimType",
+        "Type": "nvarchar(max)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "ClaimValue",
+        "Type": "nvarchar(max)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "UserId",
+        "Type": "nvarchar(450)",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": true
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "Properties": [
+          "UserId"
+        ],
+        "Parent": "AspNetUsers",
+        "ParentProperties": [
+          "Id"
+        ],
+        "Unique": false,
+        "Required": true
+      }
+    ]
+  },
+  {
+    "Name": "AspNetUserLogins",
+    "Properties": [
+      {
+        "Name": "LoginProvider",
+        "Type": "nvarchar(450)",
+        "Nullable": false,
+        "PrimaryKey": true,
+        "ForeignKey": false
+      },
+      {
+        "Name": "ProviderKey",
+        "Type": "nvarchar(450)",
+        "Nullable": false,
+        "PrimaryKey": true,
+        "ForeignKey": false
+      },
+      {
+        "Name": "ProviderDisplayName",
+        "Type": "nvarchar(max)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "UserId",
+        "Type": "nvarchar(450)",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": true
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "Properties": [
+          "UserId"
+        ],
+        "Parent": "AspNetUsers",
+        "ParentProperties": [
+          "Id"
+        ],
+        "Unique": false,
+        "Required": true
+      }
+    ]
+  },
+  {
+    "Name": "AspNetUserRoles",
+    "Properties": [
+      {
+        "Name": "UserId",
+        "Type": "nvarchar(450)",
+        "Nullable": false,
+        "PrimaryKey": true,
+        "ForeignKey": true
+      },
+      {
+        "Name": "RoleId",
+        "Type": "nvarchar(450)",
+        "Nullable": false,
+        "PrimaryKey": true,
+        "ForeignKey": true
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "Properties": [
+          "RoleId"
+        ],
+        "Parent": "AspNetRoles",
+        "ParentProperties": [
+          "Id"
+        ],
+        "Unique": false,
+        "Required": true
+      },
+      {
+        "Properties": [
+          "UserId"
+        ],
+        "Parent": "AspNetUsers",
+        "ParentProperties": [
+          "Id"
+        ],
+        "Unique": false,
+        "Required": true
+      }
+    ]
+  },
+  {
+    "Name": "AspNetUsers",
+    "Properties": [
+      {
+        "Name": "Id",
+        "Type": "nvarchar(450)",
+        "Nullable": false,
+        "PrimaryKey": true,
+        "ForeignKey": false
+      },
+      {
+        "Name": "AccessFailedCount",
+        "Type": "int",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "ConcurrencyStamp",
+        "Type": "nvarchar(max)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "Email",
+        "Type": "nvarchar(256)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "EmailConfirmed",
+        "Type": "bit",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "FirstName",
+        "Type": "nvarchar(50)",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "Gender",
+        "Type": "nvarchar(20)",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "LastName",
+        "Type": "nvarchar(50)",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "LockoutEnabled",
+        "Type": "bit",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "LockoutEnd",
+        "Type": "datetimeoffset",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "NormalizedEmail",
+        "Type": "nvarchar(256)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "NormalizedUserName",
+        "Type": "nvarchar(256)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "PasswordHash",
+        "Type": "nvarchar(max)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "PhoneNumber",
+        "Type": "nvarchar(max)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "PhoneNumberConfirmed",
+        "Type": "bit",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "ProfileImagePath",
+        "Type": "nvarchar(260)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "SecurityStamp",
+        "Type": "nvarchar(max)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "TwoFactorEnabled",
+        "Type": "bit",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "UserName",
+        "Type": "nvarchar(256)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      }
+    ],
+    "ForeignKeys": []
+  },
+  {
+    "Name": "AspNetUserTokens",
+    "Properties": [
+      {
+        "Name": "UserId",
+        "Type": "nvarchar(450)",
+        "Nullable": false,
+        "PrimaryKey": true,
+        "ForeignKey": true
+      },
+      {
+        "Name": "LoginProvider",
+        "Type": "nvarchar(450)",
+        "Nullable": false,
+        "PrimaryKey": true,
+        "ForeignKey": false
+      },
+      {
+        "Name": "Name",
+        "Type": "nvarchar(450)",
+        "Nullable": false,
+        "PrimaryKey": true,
+        "ForeignKey": false
+      },
+      {
+        "Name": "Value",
+        "Type": "nvarchar(max)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "Properties": [
+          "UserId"
+        ],
+        "Parent": "AspNetUsers",
+        "ParentProperties": [
+          "Id"
+        ],
+        "Unique": false,
+        "Required": true
+      }
+    ]
+  },
+  {
+    "Name": "Categories",
+    "Properties": [
+      {
+        "Name": "Id",
+        "Type": "int",
+        "Nullable": false,
+        "PrimaryKey": true,
+        "ForeignKey": false
+      },
+      {
+        "Name": "DistanceKm",
+        "Type": "decimal(8,2)",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "EventId",
+        "Type": "int",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": true
+      },
+      {
+        "Name": "Name",
+        "Type": "nvarchar(100)",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "Properties": [
+          "EventId"
+        ],
+        "Parent": "Events",
+        "ParentProperties": [
+          "Id"
+        ],
+        "Unique": false,
+        "Required": true
+      }
+    ]
+  },
+  {
+    "Name": "Enrolments",
+    "Properties": [
+      {
+        "Name": "Id",
+        "Type": "int",
+        "Nullable": false,
+        "PrimaryKey": true,
+        "ForeignKey": false
+      },
+      {
+        "Name": "CategoryId",
+        "Type": "int",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": true
+      },
+      {
+        "Name": "EnrolledAt",
+        "Type": "datetime2",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "EventId",
+        "Type": "int",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": true
+      },
+      {
+        "Name": "ParticipantId",
+        "Type": "nvarchar(450)",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": true
+      },
+      {
+        "Name": "Status",
+        "Type": "nvarchar(20)",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "Properties": [
+          "CategoryId"
+        ],
+        "Parent": "Categories",
+        "ParentProperties": [
+          "Id"
+        ],
+        "Unique": false,
+        "Required": true
+      },
+      {
+        "Properties": [
+          "EventId"
+        ],
+        "Parent": "Events",
+        "ParentProperties": [
+          "Id"
+        ],
+        "Unique": false,
+        "Required": true
+      },
+      {
+        "Properties": [
+          "ParticipantId"
+        ],
+        "Parent": "AspNetUsers",
+        "ParentProperties": [
+          "Id"
+        ],
+        "Unique": false,
+        "Required": true
+      }
+    ]
+  },
+  {
+    "Name": "Events",
+    "Properties": [
+      {
+        "Name": "Id",
+        "Type": "int",
+        "Nullable": false,
+        "PrimaryKey": true,
+        "ForeignKey": false
+      },
+      {
+        "Name": "BannerBlobName",
+        "Type": "nvarchar(260)",
+        "Nullable": true,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "CreatedAt",
+        "Type": "datetime2",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "Date",
+        "Type": "datetime2",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "Description",
+        "Type": "nvarchar(2000)",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "DistanceKm",
+        "Type": "decimal(8,2)",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "EventType",
+        "Type": "nvarchar(20)",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "Location",
+        "Type": "nvarchar(200)",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "Name",
+        "Type": "nvarchar(150)",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "OrganiserId",
+        "Type": "nvarchar(450)",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": true
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "Properties": [
+          "OrganiserId"
+        ],
+        "Parent": "AspNetUsers",
+        "ParentProperties": [
+          "Id"
+        ],
+        "Unique": false,
+        "Required": true
+      }
+    ]
+  },
+  {
+    "Name": "Results",
+    "Properties": [
+      {
+        "Name": "Id",
+        "Type": "int",
+        "Nullable": false,
+        "PrimaryKey": true,
+        "ForeignKey": false
+      },
+      {
+        "Name": "EnrolmentId",
+        "Type": "int",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": true
+      },
+      {
+        "Name": "EventId",
+        "Type": "int",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": true
+      },
+      {
+        "Name": "FinishTime",
+        "Type": "time",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "Position",
+        "Type": "int",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      },
+      {
+        "Name": "PublishedAt",
+        "Type": "datetime2",
+        "Nullable": false,
+        "PrimaryKey": false,
+        "ForeignKey": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "Properties": [
+          "EnrolmentId"
+        ],
+        "Parent": "Enrolments",
+        "ParentProperties": [
+          "Id"
+        ],
+        "Unique": true,
+        "Required": true
+      },
+      {
+        "Properties": [
+          "EventId"
+        ],
+        "Parent": "Events",
+        "ParentProperties": [
+          "Id"
+        ],
+        "Unique": false,
+        "Required": true
+      }
+    ]
+  }
+]

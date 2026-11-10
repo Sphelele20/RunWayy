@@ -40,11 +40,11 @@ try{
  var other=await Register("Organiser");var runner=await Register("Participant");var second=await Register("Participant");
  var events=await Read<List<EventDto>>(await Expect(HttpMethod.Get,"api/events",HttpStatusCode.OK));
  Check(events.Count>=3&&events.All(e=>!e.IsPast),"Demo upcoming events rendered");
- var filtered=await Read<List<EventDto>>(await Expect(HttpMethod.Get,"api/events?search=Sunrise&eventType=Road&minDistance=9&maxDistance=11",HttpStatusCode.OK));
+ var filtered=await Read<List<EventDto>>(await Expect(HttpMethod.Get,"api/events?search=Sunrise&eventType=Run&minDistance=9&maxDistance=11",HttpStatusCode.OK));
  Check(filtered.Count==1,"Search, type and distance filters");
  await Expect(HttpMethod.Post,"api/auth/register",HttpStatusCode.BadRequest,new RegisterRequest{Email="bad@test.local",Password="TestStrong!42",FirstName="Bad",LastName="Admin",Role="Admin"});
  await Expect(HttpMethod.Post,"api/auth/login",HttpStatusCode.Unauthorized,new LoginRequest{Email="participant@raceday.com",Password="wrong"});
- var input=new EventRequest{Name="Smoke test race",Description="Temporary integration fixture",Date=RaceClock.Now.AddDays(7),Location="Johannesburg",DistanceKm=10,EventType=EventType.Road};
+ var input=new EventRequest{Name="Smoke test race",Description="Temporary integration fixture",Date=RaceClock.Now.AddDays(7),Location="Johannesburg",DistanceKm=10,EventType=EventType.Run};
  await Expect(HttpMethod.Post,"api/events",HttpStatusCode.Unauthorized,input);
  await Expect(HttpMethod.Post,"api/events",HttpStatusCode.Forbidden,input,runner.Token);
  var created=await Read<EventDto>(await Expect(HttpMethod.Post,"api/events",HttpStatusCode.Created,input,organiser.Token));var eventPath="api/events/"+created.Id;
@@ -101,7 +101,7 @@ try{
  }
  var eventForm=await browser.GetStringAsync("Organiser/CreateEvent");
  var formResponse=await browser.PostAsync("Organiser/CreateEvent",new FormUrlEncodedContent(new Dictionary<string,string>{
-  {"Name","MVC form test race"},{"Description","Created through the original organiser form"},{"Location","Cape Town"},{"Date",RaceClock.Now.AddDays(14).ToString("yyyy-MM-ddTHH:mm")},{"DistanceKm","10.5"},{"EventType","Road"},{"__RequestVerificationToken",Token(eventForm)}
+  {"Name","MVC form test race"},{"Description","Created through the original organiser form"},{"Location","Cape Town"},{"Date",RaceClock.Now.AddDays(14).ToString("yyyy-MM-ddTHH:mm")},{"DistanceKm","10.5"},{"EventType","Run"},{"__RequestVerificationToken",Token(eventForm)}
  }));
  Check(formResponse.StatusCode==HttpStatusCode.Redirect,"MVC event creation form");
  var uiEventId=int.Parse(Regex.Match(formResponse.Headers.Location!.ToString(),"eventId=(\\d+)").Groups[1].Value);
